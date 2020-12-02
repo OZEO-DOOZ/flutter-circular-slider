@@ -112,6 +112,15 @@ class _SingleCircularSliderState extends State<SingleCircularSlider> {
   }
 
   @override
+  void didUpdateWidget(covariant SingleCircularSlider oldWidget) {
+    if (oldWidget.position != widget.position) {
+      setState(() {
+        _end = widget.position;
+      });
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
         height: widget.height ?? 220,
