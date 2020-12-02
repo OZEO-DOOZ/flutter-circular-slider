@@ -6,9 +6,10 @@ import 'utils.dart';
 
 class BasePainter extends CustomPainter {
   Color baseColor;
-  Color selectionColor;
   int primarySectors;
+  Color primaryColor;
   int secondarySectors;
+  Color secondaryColor;
   double sliderStrokeWidth;
 
   Offset center;
@@ -16,9 +17,10 @@ class BasePainter extends CustomPainter {
 
   BasePainter({
     @required this.baseColor,
-    @required this.selectionColor,
     @required this.primarySectors,
+    @required this.primaryColor,
     @required this.secondarySectors,
+    @required this.secondaryColor,
     @required this.sliderStrokeWidth,
   });
 
@@ -35,11 +37,11 @@ class BasePainter extends CustomPainter {
     canvas.drawCircle(center, radius, base);
 
     if (primarySectors > 0) {
-      _paintSectors(primarySectors, 8.0, selectionColor, canvas);
+      _paintSectors(primarySectors, 8.0, primaryColor, canvas);
     }
 
     if (secondarySectors > 0) {
-      _paintSectors(secondarySectors, 6.0, baseColor, canvas);
+      _paintSectors(secondarySectors, 6.0, secondaryColor, canvas);
     }
   }
 

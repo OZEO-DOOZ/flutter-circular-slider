@@ -1,5 +1,5 @@
 import 'dart:math';
-
+import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 
 import 'circular_slider_paint.dart' show CircularSliderMode;
@@ -10,7 +10,7 @@ class SliderPainter extends CustomPainter {
   double startAngle;
   double endAngle;
   double sweepAngle;
-  Color selectionColor;
+  List<Color> selectionColors;
   Color handlerColor;
   double handlerOutterRadius;
   bool showRoundedCapInSelection;
@@ -27,7 +27,7 @@ class SliderPainter extends CustomPainter {
     @required this.startAngle,
     @required this.endAngle,
     @required this.sweepAngle,
-    @required this.selectionColor,
+    @required this.selectionColors,
     @required this.handlerColor,
     @required this.handlerOutterRadius,
     @required this.showRoundedCapInSelection,
@@ -37,13 +37,8 @@ class SliderPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    Paint progress = _getPaint(color: selectionColor);
-
     center = Offset(size.width / 2, size.height / 2);
     radius = min(size.width / 2, size.height / 2) - sliderStrokeWidth;
-
-    canvas.drawArc(Rect.fromCircle(center: center, radius: radius),
-        -pi / 2 + startAngle, sweepAngle, false, progress);
 
     Paint handler = _getPaint(color: handlerColor, style: PaintingStyle.fill);
     Paint handlerOutter = _getPaint(color: handlerColor, width: 2.0);
@@ -56,6 +51,21 @@ class SliderPainter extends CustomPainter {
     }
 
     endHandler = radiansToCoordinates(center, -pi / 2 + endAngle, radius);
+
+    Rect rect = Rect.fromCircle(center: center, radius: radius);
+    var gradient = SweepGradient(
+      startAngle: 0.0,
+      endAngle: pi * 2,
+      colors: selectionColors,
+      stops: const <double>[0.0, 1.0],
+      transform: GradientRotation(-pi / 2),
+    );
+    Paint progress = Paint()
+      ..shader = gradient.createShader(rect)
+      ..strokeCap = showRoundedCapInSelection ? StrokeCap.round : StrokeCap.butt
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = sliderStrokeWidth;
+    canvas.drawArc(rect, -pi / 2 + startAngle, sweepAngle, false, progress);
     canvas.drawCircle(endHandler, 8.0, handler);
     if (showHandlerOutter) {
       canvas.drawCircle(endHandler, handlerOutterRadius, handlerOutter);

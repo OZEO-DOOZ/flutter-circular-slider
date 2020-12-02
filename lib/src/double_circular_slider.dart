@@ -24,9 +24,15 @@ class DoubleCircularSlider extends StatefulWidget {
   /// will be painted using selectionColor
   final int primarySectors;
 
+  /// color of primarySectors
+  final Color primaryColor;
+
   /// the number of secondary sectors to be painted
   /// will be painted using baseColor
   final int secondarySectors;
+
+  /// color of secondarySectors
+  final Color secondaryColor;
 
   /// an optional widget that would be mounted inside the circle
   final Widget child;
@@ -41,7 +47,7 @@ class DoubleCircularSlider extends StatefulWidget {
   final Color baseColor;
 
   /// color of the selection
-  final Color selectionColor;
+  final Color selectionColors;
 
   /// color of the handlers
   final Color handlerColor;
@@ -75,9 +81,11 @@ class DoubleCircularSlider extends StatefulWidget {
     this.width,
     this.child,
     this.primarySectors,
+    this.primaryColor,
     this.secondarySectors,
+    this.secondaryColor,
     this.baseColor,
-    this.selectionColor,
+    this.selectionColors,
     this.handlerColor,
     this.onSelectionChange,
     this.onSelectionEnd,
@@ -118,7 +126,9 @@ class _DoubleCircularSliderState extends State<DoubleCircularSlider> {
           end: _end,
           divisions: widget.divisions,
           primarySectors: widget.primarySectors ?? 0,
+          primaryColor: widget.primaryColor,
           secondarySectors: widget.secondarySectors ?? 0,
+          secondaryColor: widget.secondaryColor,
           child: widget.child,
           onSelectionChange: (newInit, newEnd, laps) {
             if (widget.onSelectionChange != null) {
@@ -136,8 +146,8 @@ class _DoubleCircularSliderState extends State<DoubleCircularSlider> {
           },
           sliderStrokeWidth: widget.sliderStrokeWidth ?? 12.0,
           baseColor: widget.baseColor ?? Color.fromRGBO(255, 255, 255, 0.1),
-          selectionColor:
-              widget.selectionColor ?? Color.fromRGBO(255, 255, 255, 0.3),
+          selectionColors: widget.selectionColors ??
+              [Colors.transparent, Color.fromRGBO(255, 255, 255, 0.3)],
           handlerColor: widget.handlerColor ?? Colors.white,
           handlerOutterRadius: widget.handlerOutterRadius ?? 12.0,
           showRoundedCapInSelection: false,

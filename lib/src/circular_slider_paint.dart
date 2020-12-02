@@ -17,11 +17,13 @@ class CircularSliderPaint extends StatefulWidget {
   final int end;
   final int divisions;
   final int primarySectors;
+  final Color primaryColor;
   final int secondarySectors;
+  final Color secondaryColor;
   final SelectionChanged<int> onSelectionChange;
   final SelectionChanged<int> onSelectionEnd;
   final Color baseColor;
-  final Color selectionColor;
+  final List<Color> selectionColors;
   final Color handlerColor;
   final double handlerOutterRadius;
   final Widget child;
@@ -37,11 +39,13 @@ class CircularSliderPaint extends StatefulWidget {
     @required this.end,
     this.child,
     @required this.primarySectors,
+    @required this.primaryColor,
     @required this.secondarySectors,
+    @required this.secondaryColor,
     @required this.onSelectionChange,
     @required this.onSelectionEnd,
     @required this.baseColor,
-    @required this.selectionColor,
+    @required this.selectionColors,
     @required this.handlerColor,
     @required this.handlerOutterRadius,
     @required this.showRoundedCapInSelection,
@@ -113,17 +117,18 @@ class _CircularSliderState extends State<CircularSliderPaint> {
         CustomPanGestureRecognizer:
             GestureRecognizerFactoryWithHandlers<CustomPanGestureRecognizer>(
           () => CustomPanGestureRecognizer(
-                onPanDown: _onPanDown,
-                onPanUpdate: _onPanUpdate,
-                onPanEnd: _onPanEnd,
-              ),
+            onPanDown: _onPanDown,
+            onPanUpdate: _onPanUpdate,
+            onPanEnd: _onPanEnd,
+          ),
           (CustomPanGestureRecognizer instance) {},
         ),
       },
       child: CustomPaint(
         painter: BasePainter(
           baseColor: widget.baseColor,
-          selectionColor: widget.selectionColor,
+          primaryColor: widget.primaryColor,
+          secondaryColor: widget.secondaryColor,
           primarySectors: widget.primarySectors,
           secondarySectors: widget.secondarySectors,
           sliderStrokeWidth: widget.sliderStrokeWidth,
@@ -179,7 +184,7 @@ class _CircularSliderState extends State<CircularSliderPaint> {
       startAngle: _startAngle,
       endAngle: _endAngle,
       sweepAngle: _sweepAngle,
-      selectionColor: widget.selectionColor,
+      selectionColors: widget.selectionColors,
       handlerColor: widget.handlerColor,
       handlerOutterRadius: widget.handlerOutterRadius,
       showRoundedCapInSelection: widget.showRoundedCapInSelection,

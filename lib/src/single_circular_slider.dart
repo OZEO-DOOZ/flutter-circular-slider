@@ -21,9 +21,15 @@ class SingleCircularSlider extends StatefulWidget {
   /// will be painted using selectionColor
   final int primarySectors;
 
+  /// color of primarySectors
+  final Color primaryColor;
+
   /// the number of secondary sectors to be painted
   /// will be painted using baseColor
   final int secondarySectors;
+
+  /// color of secondarySectors
+  final Color secondaryColor;
 
   /// an optional widget that would be mounted inside the circle
   final Widget child;
@@ -38,7 +44,7 @@ class SingleCircularSlider extends StatefulWidget {
   final Color baseColor;
 
   /// color of the selection
-  final Color selectionColor;
+  final List<Color> selectionColors;
 
   /// color of the handlers
   final Color handlerColor;
@@ -74,9 +80,11 @@ class SingleCircularSlider extends StatefulWidget {
     this.width,
     this.child,
     this.primarySectors,
+    this.primaryColor,
     this.secondarySectors,
+    this.secondaryColor,
     this.baseColor,
-    this.selectionColor,
+    this.selectionColors,
     this.handlerColor,
     this.onSelectionChange,
     this.onSelectionEnd,
@@ -131,8 +139,10 @@ class _SingleCircularSliderState extends State<SingleCircularSlider> {
           },
           sliderStrokeWidth: widget.sliderStrokeWidth ?? 12.0,
           baseColor: widget.baseColor ?? Color.fromRGBO(255, 255, 255, 0.1),
-          selectionColor:
-              widget.selectionColor ?? Color.fromRGBO(255, 255, 255, 0.3),
+          primaryColor: widget.primaryColor ?? Colors.transparent,
+          secondaryColor: widget.secondaryColor ?? Colors.transparent,
+          selectionColors: widget.selectionColors ??
+              [Colors.transparent, Color.fromRGBO(255, 255, 255, 0.3)],
           handlerColor: widget.handlerColor ?? Colors.white,
           handlerOutterRadius: widget.handlerOutterRadius ?? 12.0,
           showRoundedCapInSelection: widget.showRoundedCapInSelection ?? false,

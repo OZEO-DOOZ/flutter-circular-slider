@@ -93,7 +93,7 @@ There are two different options:
 | onSelectionChange         | void onSelectionChange(int init, int end, int laps) | Triggered every time the user interacts with the slider and changes the init and end values, and also laps.             |
 | onSelectionEnd            |  void onSelectionEnd(int init, int end, int laps)   | Triggered every time the user finish one interaction with the slider.                                                   |
 | baseColor                 |         Color.fromRGBO(255, 255, 255, 0.1)          | The color used for the base of the circle.                                                                              |
-| selectionColor            |         Color.fromRGBO(255, 255, 255, 0.3)          | The color used for the selection in the circle.                                                                         |
+| selectionColors            |         [Colors.transparent, Color.fromRGBO(255, 255, 255, 0.3)]          | The color used for the selection in the circle.                                                                         |
 | handlerColor              |                    Colors.white                     | The color used for the handlers.                                                                                        |
 | handlerOutterRadius       |                        12.0                         | The radius for the outter circle around the handler.                                                                    |
 | showRoundedCapInSelection |                        false                        | (Only for SingleCircularSlider) Shows a rounded cap at the edge of the selection slider with no handler.                |
