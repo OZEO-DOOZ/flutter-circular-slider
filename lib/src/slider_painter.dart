@@ -55,7 +55,7 @@ class SliderPainter extends CustomPainter {
     Rect rect = Rect.fromCircle(center: center, radius: radius);
     var gradient = SweepGradient(
       startAngle: 0.0,
-      endAngle: pi * 2,
+      endAngle: endAngle,
       colors: selectionColors,
       stops: const <double>[0.0, 1.0],
       transform: GradientRotation(-pi / 2),
