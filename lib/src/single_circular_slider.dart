@@ -113,6 +113,7 @@ class _SingleCircularSliderState extends State<SingleCircularSlider> {
 
   @override
   void didUpdateWidget(covariant SingleCircularSlider oldWidget) {
+    super.didUpdateWidget(oldWidget);
     if (oldWidget.divisions != widget.divisions) {
       setState(() {
         _end = widget.position;
@@ -134,6 +135,7 @@ class _SingleCircularSliderState extends State<SingleCircularSlider> {
           secondarySectors: widget.secondarySectors ?? 0,
           child: widget.child,
           onSelectionChange: (newInit, newEnd, laps) {
+            newEnd = newEnd == widget.divisions ? newEnd - 1 : newEnd;
             if (widget.onSelectionChange != null) {
               widget.onSelectionChange(newInit, newEnd, laps);
             }

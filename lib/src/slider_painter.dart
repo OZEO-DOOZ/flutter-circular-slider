@@ -53,19 +53,21 @@ class SliderPainter extends CustomPainter {
     endHandler = radiansToCoordinates(center, -pi / 2 + endAngle, radius);
 
     Rect rect = Rect.fromCircle(center: center, radius: radius);
-    var gradient = SweepGradient(
-      startAngle: 0.0,
-      endAngle: endAngle,
-      colors: selectionColors,
-      stops: const <double>[0.0, 1.0],
-      transform: GradientRotation(-pi / 2),
-    );
-    Paint progress = Paint()
+    if (endAngle > 0) {
+      var gradient = SweepGradient(
+        startAngle: 0.0,
+        endAngle: endAngle,
+        colors: selectionColors,
+        stops: const <double>[0.0, 1.0],
+        transform: GradientRotation(-pi / 2),
+      );
+      Paint progress = Paint()
       ..shader = gradient.createShader(rect)
-      ..strokeCap = showRoundedCapInSelection ? StrokeCap.round : StrokeCap.butt
+      ..strokeCap = StrokeCap.butt
       ..style = PaintingStyle.stroke
       ..strokeWidth = sliderStrokeWidth;
-    canvas.drawArc(rect, -pi / 2 + startAngle, sweepAngle, false, progress);
+      canvas.drawArc(rect, -pi / 2 + startAngle, sweepAngle, false, progress);
+    }
     canvas.drawCircle(endHandler, 8.0, handler);
     if (showHandlerOutter) {
       canvas.drawCircle(endHandler, handlerOutterRadius, handlerOutter);

@@ -28,11 +28,11 @@ class MyHomePage extends StatelessWidget {
         body: SafeArea(
       child: Container(
           decoration: BoxDecoration(
-            // image: DecorationImage(
-            //   image: AssetImage('images/background_morning.png'),
-            //   fit: BoxFit.cover,
-            // ),
-          ),
+              // image: DecorationImage(
+              //   image: AssetImage('images/background_morning.png'),
+              //   fit: BoxFit.cover,
+              // ),
+              ),
           child: SleepPage()),
     ));
   }
@@ -69,6 +69,9 @@ class _SleepPageState extends State<SleepPage> {
   }
 
   void _updateLabels(int init, int end, int laps) {
+    print('-------');
+    print(init);
+    print(end);
     setState(() {
       inBedTime = init;
       outBedTime = end;
@@ -86,12 +89,10 @@ class _SleepPageState extends State<SleepPage> {
           style: TextStyle(color: Colors.white),
         ),
         SingleCircularSlider(
-          288,
-          endTime,
+          24,
+          1,
           height: 220.0,
           width: 220.0,
-          primarySectors: 6,
-          secondarySectors: 24,
           baseColor: Color.fromRGBO(0, 255, 0, 0.2),
           selectionColors: [Colors.transparent, Colors.teal],
           handlerColor: Colors.green[900],
@@ -100,55 +101,8 @@ class _SleepPageState extends State<SleepPage> {
           showHandlerOutter: false,
           sliderStrokeWidth: 10,
           handlerOutterRadius: 20,
-          // child: Padding(
-          //     padding: const EdgeInsets.all(42.0),
-          //     child: Column(
-          //       mainAxisAlignment: MainAxisAlignment.center,
-          //       children: [
-          //         SizedBox(height: 20),
-          //         Text('${_formatIntervalTime(inBedTime, outBedTime)}',
-          //             style: TextStyle(fontSize: 24.0, color: Colors.white)),
-          //         Text('${_formatDays(days)}',
-          //             style: TextStyle(
-          //                 fontSize: 16.0,
-          //                 color: Colors.white,
-          //                 fontStyle: FontStyle.italic)),
-          //       ],
-          //     )),
           shouldCountLaps: true,
         ),
-        // DoubleCircularSlider(
-        //   288,
-        //   initTime,
-        //   endTime,
-        //   height: 260.0,
-        //   width: 260.0,
-        //   primarySectors: 6,
-        //   secondarySectors: 24,
-        //   baseColor: Color.fromRGBO(255, 255, 255, 0.1),
-        //   selectionColor: baseColor,
-        //   handlerColor: Colors.white,
-        //   handlerOutterRadius: 12.0,
-        //   onSelectionChange: _updateLabels,
-        //   onSelectionEnd: (a, b, c) => print('onSelectionEnd $a $b $c'),
-        //   sliderStrokeWidth: 12.0,
-        //   child: Padding(
-        //       padding: const EdgeInsets.all(42.0),
-        //       child: Column(
-        //         mainAxisAlignment: MainAxisAlignment.center,
-        //         children: [
-        //           SizedBox(height: 30),
-        //           Text('${_formatIntervalTime(inBedTime, outBedTime)}',
-        //               style: TextStyle(fontSize: 36.0, color: Colors.white)),
-        //           Text('${_formatDays(days)}',
-        //               style: TextStyle(
-        //                   fontSize: 28.0,
-        //                   color: Colors.white,
-        //                   fontStyle: FontStyle.italic)),
-        //         ],
-        //       )),
-        //   shouldCountLaps: true,
-        // ),
         Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
           _formatBedTime('IN THE', inBedTime),
           _formatBedTime('OUT OF', outBedTime),
