@@ -114,7 +114,8 @@ class _SingleCircularSliderState extends State<SingleCircularSlider> {
   @override
   void didUpdateWidget(covariant SingleCircularSlider oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (oldWidget.divisions != widget.divisions) {
+    if (oldWidget.divisions != widget.divisions ||
+        oldWidget.position != widget.position) {
       setState(() {
         _end = widget.position;
       });
